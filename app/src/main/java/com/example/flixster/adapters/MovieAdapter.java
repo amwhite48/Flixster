@@ -3,6 +3,7 @@ package com.example.flixster.adapters;
 import java.util.List;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -16,8 +17,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.flixster.MovieDetailsActivity;
 import com.example.flixster.R;
 import com.example.flixster.models.Movie;
+
+import org.parceler.Parcels;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
 
@@ -59,7 +63,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
     }
 
     // ViewHolder represents a row in the RecyclerView
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         TextView tvTitle;
         TextView tvOverview;
@@ -68,9 +72,12 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            // gets views to display
             tvTitle = itemView.findViewById(R.id.tvTitle);
             tvOverview = itemView.findViewById(R.id.tvOverview);
             ivPoster = itemView.findViewById(R.id.ivPoster);
+
+            itemView.setOnClickListener(this);
         }
 
         public void bind(Movie movie) {
@@ -88,7 +95,27 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
                 imageURL = movie.getPosterPath();
                 placeholder = R.drawable.flicks_movie_placeholder;
             }
+            // loads image and displays placeholder while loading
             Glide.with(context).load(imageURL).placeholder(placeholder).into(ivPoster);
+        }
+
+        // when user clicks on a view, show the MovieDetailsActivity
+        @Override
+        public void onClick(View view) {
+            // get item position
+            int pos = getAdapterPosition();
+            // make sure position is valid
+            if(pos != RecyclerView.NO_POSITION) {
+                // get current movie
+                Movie movie = movies.get(pos);
+                // create intent for new activity
+                Intent intent = new Intent(context, MovieDetailsActivity.class);
+                // serialize movie w/ parceler, w short name as key
+                intent.putExtra(Movie.class.getSimpleName(), Parcels.wrap(movie));
+                // show activity
+                context.startActivity(intent);
+            }
+
         }
     }
 }
