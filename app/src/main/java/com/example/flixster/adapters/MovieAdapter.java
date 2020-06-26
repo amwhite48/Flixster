@@ -3,6 +3,7 @@ package com.example.flixster.adapters;
 import java.util.List;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,7 +77,14 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             tvTitle.setText(movie.getTitle());
             tvOverview.setText(movie.getOverview());
             // use Glide library to embed images
-            Glide.with(context).load(movie.getPosterPath()).into(ivPoster);
+            String imageURL;
+            // use poster if vertical, backdrop if horizontal
+            if(context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+                imageURL = movie.getBackdropPath();
+            } else {
+                imageURL = movie.getPosterPath();
+            }
+            Glide.with(context).load(imageURL).into(ivPoster);
         }
     }
 }

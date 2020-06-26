@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         RecyclerView rvMovies = findViewById(R.id.rvMovies);
         movies = new ArrayList<>();
-        // movies.add(new Movie(null));
+
         // Create adapter
         movieAdapter = new MovieAdapter(this, movies);
         Log.d(TAG, "adapter created");
