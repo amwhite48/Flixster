@@ -30,13 +30,14 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/amwhite48/Flixster/blob/master/VerticalWalkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/amwhite48/Flixster/blob/master/HorizontalWalkthrough.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
 ## Notes
 
-I had some difficulty with implementing the RecyclerView but I think I have a much better understanding of it now.
+Working with the RecyclerView and JSON was challenging but my understanding has really improved as a result.
 
 ## Open-source libraries used
 
