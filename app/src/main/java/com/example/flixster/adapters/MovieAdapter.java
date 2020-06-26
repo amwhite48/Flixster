@@ -4,6 +4,7 @@ import java.util.List;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -78,13 +79,16 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder>{
             tvOverview.setText(movie.getOverview());
             // use Glide library to embed images
             String imageURL;
+            int placeholder;
             // use poster if vertical, backdrop if horizontal
             if(context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 imageURL = movie.getBackdropPath();
+                placeholder = R.drawable.flicks_backdrop_placeholder;
             } else {
                 imageURL = movie.getPosterPath();
+                placeholder = R.drawable.flicks_movie_placeholder;
             }
-            Glide.with(context).load(imageURL).into(ivPoster);
+            Glide.with(context).load(imageURL).placeholder(placeholder).into(ivPoster);
         }
     }
 }
